@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
     },
     mobile: {
         type: String,  // if we have country code it must be string
-        require: true,
+        required: true,
         unique: true
     },
     age: {
@@ -30,8 +30,8 @@ const userSchema = new mongoose.Schema({
         default: true   // default value
     }
 }, {
-    collation: 'users', // name of the collection
+    collection: 'users', // name of the collection
     timestamps: true // log the created and updated times in collections
 })
 
-module.exports = mongoose.model("user", userSchema) // model(Export Schema Name, schema ref)
+module.exports = mongoose.model("User", userSchema) // model(Export Schema Name, schema ref)
