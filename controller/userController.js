@@ -4,7 +4,7 @@ const User = require('../model/userModel')
 
 const userController = {
     index: (req,res) => {
-        res.render('index.ejs')
+        res.render('index.ejs') // it is used to render(display) the view and help us to receive the request + data and sending response  to the view.
     },
     new: (req,res) => {
         res.render('create.ejs')
@@ -32,6 +32,21 @@ const userController = {
               return res.status(200).json({ msg: "new User created successfully", newUser })
         }catch(err) {
             console.log(err)  // exception handling
+        }
+    },
+    readUser: async (req,res) => {
+        try {
+              // 200 -> status ok
+              // 400 -> bad request
+              // 401 -> unauthorized
+              // 404 -> page not found
+              // 505 -> server not found
+              
+            let users = await User.find()
+                res.status(200).json({ length: users.length, users })
+        } catch(err){
+            // 500 - > internal server error
+            return res.status(500).json({ msg: err.message })
         }
     },
     pnf: (req,res) => {
