@@ -36,7 +36,7 @@ const userDOM = document.querySelector('#users');
                 </ul>
             </div>
             <div class="card-footer">
-                <a href="/edit/${item._id}" class="btn btn-info">Edit</a>
+                <a href="/edit?id=${item._id}" class="btn btn-info">Edit</a>
                 <button class="btn btn-danger float-end">Delete</button>
             </div>
          </div>

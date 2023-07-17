@@ -13,6 +13,7 @@ const userController = {
         res.render('edit.ejs')
     },
     // we create a new controller to handler incoming data from front end
+    // api controller -> which handler post request
     newUser: async (req,res) => {
         try {
               const newUser = req.body  // receive data from frontend 
@@ -46,6 +47,36 @@ const userController = {
                 res.status(200).json({ length: users.length, users })
         } catch(err){
             // 500 - > internal server error
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+    readSingleUser: async (req,res) => {
+        try{
+            let id = req.params.id // ref id from router params
+
+            let single = await User.findById({  _id: id })  // requesting db to get user info
+                if(!single)
+                    return res.status(404).json({ msg: `Requested user is not found`})
+
+                return res.status(200).json({ user: single })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+    updateUser: async (req,res) => {
+        try{
+            let id = req.params.id  // read id from router params
+            const data = req.body
+
+            let extUser = await User.findById({ _id: id })
+                if(!extUser)
+                    return res.status(404).json({ msg: `Requested user id not found`})
+
+                    // update logic
+                await User.findByIdAndUpdate({ _id: id }, data)
+
+                return res.status(200).json({ msg: `User data updated successfully`})
+        } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
     },

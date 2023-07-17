@@ -13,10 +13,10 @@ const connectDb = async () => {
 /*
 1. mongoose.connect method is promise request method
 2. promise constructor has 4 states 
-    fullfilled - can be handle bt .then() method 
+    fullfilled - can be handle by .then() method 
     rejected - can be handled by .catch() method 
     pending - before fullfilled or rejected 
-    settled - we can't ab;e observe the state because it executes after fullfilled or rejected
+    settled - we can't able observe the state because it executes after fullfilled or rejected
 */
 
 module.exports = connectDb
