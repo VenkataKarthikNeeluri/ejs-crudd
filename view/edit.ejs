@@ -15,7 +15,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="#menu">
+            <div class="collapse navbar-collapse" id="menu">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a href="/" class="nav-link">Home</a>
@@ -24,10 +24,10 @@
                         <a href="/create" class="nav-link">Create</a>
                     </li>
                 </ul>
-            </div>
+            </div> 
         </div>
-    </nav>
-
+    </nav>     
+    
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
@@ -108,7 +108,16 @@
                     age: age.value,
                     address: address.value
                 }
-                console.log(`updated data =`, data);
+                // console.log(`updated data =`, data);
+                await fetch (`${URL}/api/user/${id}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json'},
+                    body: JSON.stringify(data)
+                }).then(out => out.json())
+                .then(res => {
+                    window.alert(res.msg);
+                    window.location.href = "/";
+                }).catch(err => console.log(err.msg))
              }
 
     </script>
